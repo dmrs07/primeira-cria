@@ -1,13 +1,13 @@
 angular.module('main').controller('ProdutosController',
 
-function($scope, $http, $routeParams) {
+function($scope, $http, $routeParams, $location) {
 	$scope.rows = {};
 	$scope.row = {};
 
 	$(document).ready(function(){
 		$('#nome').focus();
 	});
-	
+
 	$scope.findAll = function() {
 		var response = $http.get("/listarproduto/");
 
@@ -46,7 +46,9 @@ function($scope, $http, $routeParams) {
 		});
 	}
 
-	$scope.delete = function() {
+	$scope.delete = function(id) {
+			var response = $http.get("/produtodelete/" + id);
 
+			$scope.findAll();
 	}
 });

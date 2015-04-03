@@ -29,4 +29,21 @@ angular.module('main', ['ngRoute'])
 		templateUrl: 'partials/produtos/form.html',
 		controller: 'ProdutosController'
 	});
+})
+
+.directive('confirmation', function () {
+  return {
+    priority: 1,
+    terminal: true,
+    link: function (scope, element, attr) {
+      var msg = attr.confirmation;
+      var clickAction = attr.ngClick;
+
+      element.bind('click', function () {
+        if (window.confirm(msg)) {
+          scope.$eval(clickAction)
+        }
+      });
+    }
+  };
 });

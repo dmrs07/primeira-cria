@@ -21,7 +21,7 @@
                   <p>R$ {{row.preco}}</p>
                   <p>
                     <a href="#/produto/{{row.id}}" role="button" class="text-info">Alterar</a> |
-                    <a href="#/produto/{{row.id}}" role="button" class="text-danger">Excluir</a>
+                    <a href="#/lista-produto" role="button" class="text-danger" ng-click="delete({{row.id}})"  confirmation="Posso mesmo excluir?">Excluir</a>
                   </p>
                 </div>
               </li>

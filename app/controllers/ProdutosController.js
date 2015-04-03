@@ -82,5 +82,21 @@ module.exports = function() {
     	});
 	};
 
+	controller.delete = function(req, res) {
+		req.getConnection(function(err, conn) {
+
+	        var query =
+	        		conn.query("delete from produtos where id = " + req.params.id, function(err, rows) {
+		                if(err) {
+		                    res.json(err);
+
+		                } else {
+		                    res.json("Operação realizada com sucesso");
+
+		                }
+		            });
+    	});
+	};
+
 	return controller;
 }
