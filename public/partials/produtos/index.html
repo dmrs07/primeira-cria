@@ -1,0 +1,34 @@
+<div class="section">
+  <div class="container">
+    <div class="row" ng-init="findAll()">
+      <p>
+        <a class="btn btn-primary" href="#/cadastrar-produto" role="button">Novo</a>
+        <form class="form-group">
+          <input ng-model="query" class="form-control" placeholder="Nome do item..." type="text">
+        </form>
+      </p>
+
+      <div ng-repeat="row in rows | filter: { nome: query}">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+
+                <div class="media-body">
+                  <h4 class="media-heading">{{row.nome}}</h4>
+                  <p>{{row.descricao}}</p>
+                  <p>R$ {{row.preco}}</p>
+                  <p>
+                    <a href="#/produto/{{row.id}}" role="button" class="text-info">Alterar</a> |
+                    <a href="#/produto/{{row.id}}" role="button" class="text-danger">Excluir</a>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

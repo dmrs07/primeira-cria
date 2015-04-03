@@ -1,0 +1,60 @@
+<div class="section">
+  <div class="container">
+    <div class="row" ng-init="findById()">
+      <div class="alert alert-success" role="alert" ng-show="{{msg != null}}">{{msg}}</div>
+
+      <div class="col-sm-12">
+        <form role="form">
+          <div class="form-group">
+            <input ng-model="row.id" class="form-control" id="id" placeholder="id" type="hidden">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="nome">Nome</label>
+            <input ng-model="row.nome" class="form-control" id="nome" placeholder="Nome" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="nome">Descrição</label>
+            <input ng-model="row.descricao" class="form-control" id="descricao" placeholder="Descrição" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="marca">Marca</label>
+            <input ng-model="row.marca" class="form-control" id="marca" placeholder="Marca" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="tamanho">Tamanho</label>
+            <input ng-model="row.tamanho" class="form-control" id="tamanho" placeholder="Tamanho" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="preco">Preco</label>
+            <input ng-model="row.preco" class="form-control" id="preco" placeholder="Preço" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="tamanho">Menino</label>
+            <input ng-model="row.genero" name="radioGroup" class="form-control" type="radio" value="M">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="tamanho">Menina</label>
+            <input ng-model="row.genero" name="radioGroup" class="form-control" type="radio" value="F">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="tamanho">M&M</label>
+            <input ng-model="row.genero" name="radioGroup" class="form-control" type="radio" value="A">
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-click="save()">Salvar</button>&nbsp;
+            <a href="#/lista-produto" role="button" class="text-danger">Cancelar</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
