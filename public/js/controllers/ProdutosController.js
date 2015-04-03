@@ -7,7 +7,7 @@ function($scope, $http, $routeParams) {
 	$(document).ready(function(){
 		$('#nome').focus();
 	});
-
+	
 	$scope.findAll = function() {
 		var response = $http.get("/listarproduto/");
 
@@ -47,6 +47,6 @@ function($scope, $http, $routeParams) {
 	}
 
 	$scope.delete = function() {
-		
+
 	}
 });

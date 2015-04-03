@@ -4,7 +4,7 @@ module.exports = function() {
 	controller.front = function(req, res) {
 		req.getConnection(function(err, conn) {
 
-	        var query = 
+	        var query =
 	        		conn.query("select * from produtos limit 6", function(err, rows) {
 		                if(err) {
 		                    res.json(err);
@@ -20,7 +20,7 @@ module.exports = function() {
 	controller.findAll = function(req, res) {
 		req.getConnection(function(err, conn) {
 
-	        var query = 
+	        var query =
 	        		conn.query("select * from produtos order by id desc", function(err, rows) {
 		                if(err) {
 		                    res.json(err);
@@ -34,9 +34,9 @@ module.exports = function() {
 	};
 
 	controller.findById = function(req, res) {
-		req.getConnection(function(err, conn) {	
+		req.getConnection(function(err, conn) {
 
-	        var query = 
+	        var query =
 	        		conn.query("select * from produtos where id = " + req.params.id, function(err, rows) {
 		                if(err) {
 		                    res.json(err);
@@ -69,7 +69,7 @@ module.exports = function() {
 
 				}
 
-	        var query = 
+	        var query =
         		conn.query(sql, function(err, rows) {
 	                if(err) {
 	                    res.json(err);
@@ -81,6 +81,6 @@ module.exports = function() {
 	            });
     	});
 	};
-	
+
 	return controller;
 }

@@ -6,7 +6,7 @@ angular.module('main', ['ngRoute'])
 		templateUrl: 'partials/front.html',
 		controller: 'ProdutosController'
 	});
-	
+
 	$routeProvider.when('/auth', {
 		templateUrl: 'partials/auth.html'
 	});
