@@ -120,22 +120,25 @@ function(req, res) {
 	res.redirect('/');
 });
 
+// Página inicial
 app.get('/', function(req, res) {
 	res.render('index.ejs', {
 		user : req.user // get the user out of session and pass to template
 	});
 });
 
+// Retorna pro AngularJS o usuário logado
 app.get('/user', function(req, res) {
 	res.json(req.user);
 });
 
+// Mata session
 app.get('/logout', function(req, res) {
-	console.log('LOGOUT');
 	req.logout();
 	res.redirect('/');
 });
 
+// Garante uso da api apenas user autenticado
 function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) { return next(); }
 	res.redirect('/#/auth')
