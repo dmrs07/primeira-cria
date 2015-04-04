@@ -4,8 +4,21 @@ function($scope, $http, $routeParams, $location) {
 	$scope.rows = {};
 	$scope.row = {};
 
+
+
 	$(document).ready(function(){
 		$('#nome').focus();
+
+		var response = $http.get("/categorias/");
+
+		response.success(function(data, status, headers, config) {
+			$scope.categorias = data;
+		}).
+
+		error(function(data, status, headers, config) {
+			console.log(data);
+		});
+
 	});
 
 	$scope.findAll = function() {
@@ -42,7 +55,7 @@ function($scope, $http, $routeParams, $location) {
 		}).
 
 		error(function(data, status, headers, config) {
-			console.log(data);
+			console.log("ERRO: " + data + " STATUS: " + status);
 		});
 	}
 

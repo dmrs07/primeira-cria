@@ -1,3 +1,5 @@
+var stringValidate = require('string');
+
 module.exports = function() {
 	var controller = {};
 
@@ -50,36 +52,44 @@ module.exports = function() {
 	};
 
 	controller.save = function(req, res) {
+		var data = req.body;
+		var msgSucesso;
+
 		req.getConnection(function(err, conn) {
-			var data = req.body;
-			var sql = null;
 
-				if(data.isUpdate) {
-					sql = "update produtos "
-						  + "set nome = '" + data.nome + "', "
-						  + "descricao = '" + data.descricao + "', "
-						  + "marca = '" + data.marca + "', "
-						  + "tamanho = '" + data.tamanho + "', "
-						  + "preco = '" + data.preco + "', "
-						  + "genero = '" + data.genero + "' "
-						  + "where id = '" + data.id + "'";
-				} else {
-					sql = "insert into produtos (nome, descricao, marca, tamanho, preco, genero)" +
-					 	  "values ('"+data.nome+"', '"+data.descricao+"', '"+data.marca+"', '"+data.tamanho+"', '"+data.preco+"', '"+data.genero+"')";
+		var sql = null;
 
-				}
+		if(data.isUpdate) {
+			sql = "update produtos "
+					+ "set nome = 		'" + data.nome + "', "
+					+ "descricao = 		'" + data.descricao + "', "
+					+ "marca = 				'" + data.marca + "', "
+					+ "tamanho = 			'" + data.tamanho + "', "
+					+ "preco = 				'" + data.preco + "', "
+					+ "genero = 			'" + data.genero + "', "
+					+ "categoria_id = '" + data.categoria + "' "
+					+ "where id = 		'" + data.id + "'";
 
-	        var query =
-        		conn.query(sql, function(err, rows) {
-	                if(err) {
-	                    res.json(err);
+					msgSucesso = "Item atualizado com sucesso";
+		} else {
+			sql = "insert into produtos (nome, descricao, marca, tamanho, preco, genero, categoria_id)" +
+					"values ('"+data.nome+"', '"+data.descricao+"', '"+data.marca+"', '"+data.tamanho+"', '"+data.preco+"', '"+data.genero+"', '"+data.categoria+"')";
 
-	                } else {
-	                    res.json("Operação com sucesso!");
+			msgSucesso = "Item inserido com sucesso";
+		}
 
-	                }
-	            });
-    	});
+		var query =
+			conn.query(sql, function(err, rows) {
+						if(err) {
+								res.json(500, err);
+
+						} else {
+								res.json(msgSucesso);
+
+						}
+				});
+		});
+
 	};
 
 	controller.delete = function(req, res) {
