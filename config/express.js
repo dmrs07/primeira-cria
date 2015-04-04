@@ -126,6 +126,10 @@ app.get('/', function(req, res) {
 	});
 });
 
+app.get('/user', function(req, res) {
+	res.json(req.user);
+});
+
 app.get('/logout', function(req, res) {
 	console.log('LOGOUT');
 	req.logout();

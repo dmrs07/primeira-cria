@@ -4,8 +4,6 @@ function($scope, $http, $routeParams, $location) {
 	$scope.rows = {};
 	$scope.row = {};
 
-
-
 	$(document).ready(function(){
 		$('#nome').focus();
 

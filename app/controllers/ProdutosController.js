@@ -72,8 +72,8 @@ module.exports = function() {
 
 					msgSucesso = "Item atualizado com sucesso";
 		} else {
-			sql = "insert into produtos (nome, descricao, marca, tamanho, preco, genero, categoria_id)" +
-					"values ('"+data.nome+"', '"+data.descricao+"', '"+data.marca+"', '"+data.tamanho+"', '"+data.preco+"', '"+data.genero+"', '"+data.categoria+"')";
+			sql = "insert into produtos (nome, descricao, marca, tamanho, preco, genero, categoria_id, usuario_id)" +
+					"values ('"+data.nome+"', '"+data.descricao+"', '"+data.marca+"', '"+data.tamanho+"', '"+data.preco+"', '"+data.genero+"', '"+data.categoria+"', '"+req.user.id+"')";
 
 			msgSucesso = "Item inserido com sucesso";
 		}
