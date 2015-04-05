@@ -1,6 +1,8 @@
-angular.module('main', ['ngRoute'])
+angular.module('main', ['ngRoute', 'ngResource'])
 
-.config(function($routeProvider) {
+.config(function($routeProvider, $httpProvider) {
+
+	$httpProvider.interceptors.push('loginInterceptor');
 
 	$routeProvider.when('/front', {
 		templateUrl: 'partials/front.html',

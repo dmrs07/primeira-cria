@@ -2,32 +2,40 @@
   <div class="container">
     <div class="row" ng-init="findAll()">
       <p>
-        <a class="btn btn-primary" href="#/cadastrar-produto" role="button">Novo</a>
+        <a class="btn btn-danger" href="#/cadastrar-produto" role="button">Vender</a>
+        <a class="btn btn-success" href="#/cadastrar-produto" role="button">Doar</a>
+        <a class="btn btn-info" href="#/cadastrar-produto" role="button">Trocar</a>
+        <a class="btn btn-warning" href="#/cadastrar-produto" role="button">Emprestar</a>
         <form class="form-group">
           <input ng-model="query" class="form-control" placeholder="Pesquisa..." type="text">
         </form>
       </p>
 
-      <div ng-repeat="row in rows | filter: { nome: query}">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <ul class="media-list">
-              <li class="media">
-                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
-
-                <div class="media-body">
-                  <h4 class="media-heading">{{row.nome}}</h4>
-                  <p>{{row.descricao}}</p>
-                  <p>R$ {{row.preco}}</p>
-                  <p>
-                    <a href="#/produto/{{row.id}}" role="button" class="text-info">Alterar</a> |
-                    <a href="#/lista-produto" role="button" class="text-danger" ng-click="delete({{row.id}})"  confirmation="Posso mesmo excluir?">Excluir</a>
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Tamanho</th>
+              <th>Tipo</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in rows | filter: { nome: query}">
+              <td>{{row.id}}</td>
+              <td>{{row.nome}}</td>
+              <td>{{row.tamanho}}</td>
+              <td>{{row.tipo}}</td>
+              <th><a href="#/produto/{{row.id}}" role="button" class="text-info">Alterar</a></th>
+              <th><a href="#/lista-produto" role="button" class="text-danger" ng-click="delete({{row.id}})"  confirmation="Posso mesmo excluir?">Excluir</a></th>
+              <th><a href="#/produto/{{row.id}}" role="button" class="text-info">Fotos</a></th>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

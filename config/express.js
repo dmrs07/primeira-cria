@@ -138,12 +138,6 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-// Garante uso da api apenas user autenticado
-function ensureAuthenticated(req, res, next) {
-	if (req.isAuthenticated()) { return next(); }
-	res.redirect('/#/auth')
-}
-
 // Carregamento automatico de dependencias
 load('models', {cwd: 'app'})
 .then('controllers')
