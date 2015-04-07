@@ -1,4 +1,6 @@
 var express 		  	  = require('express');
+//var multer  					= require('multer');
+
 var mysql  			  	  = require('mysql');
 var connection  	    = require('express-myconnection');
 var load 			  		  = require('express-load');
@@ -31,8 +33,9 @@ module.exports = function() {
 
 	// middlewares
 	app.use(cookieParser());
-	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
+	//app.use(multer({ dest: './uploads/'}));
 	app.use(session(
 		{ 	secret: 'homem avestruz',
 		resave: true,
