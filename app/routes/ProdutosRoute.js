@@ -16,4 +16,5 @@ module.exports = function(app) {
 	app.get('/listarproduto',   	verificaAutenticacao, produtosController.findAll);
 	app.get('/produto/:id', 			verificaAutenticacao, produtosController.findById);
 	app.get('/produtodelete/:id', verificaAutenticacao, produtosController.delete);
+	app.post('/upload', 					verificaAutenticacao, produtosController.upload);
 }

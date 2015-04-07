@@ -62,4 +62,16 @@ function($scope, $http, $routeParams, $location) {
 
 			$scope.findAll();
 	}
+
+	$scope.upload = function() {
+		var response = $http.post("/upload/", $scope.row);
+
+		response.success(function(data, status, headers, config) {
+			console.log("DATA: " + data);
+		}).
+
+		error(function(data, status, headers, config) {
+			console.log("ERRO: " + data + " STATUS: " + status);
+		});
+	}
 });

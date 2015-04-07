@@ -24,6 +24,7 @@
               <th></th>
             </tr>
           </thead>
+          
           <tbody>
             <tr ng-repeat="row in rows | filter: { nome: query}">
               <td>{{row.id}}</td>
@@ -32,11 +33,12 @@
               <td>{{row.tipo}}</td>
               <th><a href="#/produto/{{row.id}}" role="button" class="text-info">Alterar</a></th>
               <th><a href="#/lista-produto" role="button" class="text-danger" ng-click="delete({{row.id}})"  confirmation="Posso mesmo excluir?">Excluir</a></th>
-              <th><a href="#/produto/{{row.id}}" role="button" class="text-info">Fotos</a></th>
+              <th><a href="#/produto/upload/{{row.id}}" role="button" class="text-info">Fotos</a></th>
             </tr>
           </tbody>
         </table>
       </div>
+
     </div>
   </div>
 </div>

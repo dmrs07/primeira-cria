@@ -31,6 +31,11 @@ angular.module('main', ['ngRoute', 'ngResource'])
 		templateUrl: 'partials/produtos/form.html',
 		controller: 'ProdutosController'
 	});
+
+	$routeProvider.when('/produto/upload/:id', {
+		templateUrl: 'partials/produtos/upload.html',
+		controller: 'ProdutosController'
+	});
 })
 
 .directive('confirmation', function () {
