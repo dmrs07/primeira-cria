@@ -1,8 +1,12 @@
 var express 		  	  = require('express');
 //var multer  					= require('multer');
 
+<<<<<<< HEAD
 //var mysql  			  	  = require('mysql');
 var pg = require('pg');
+=======
+var mysql  			  	  = require('mysql');
+>>>>>>> 72f4884dcc6409c109891eb3d312e20cdef94d2c
 var connection  	    = require('express-myconnection');
 var load 			  		  = require('express-load');
 

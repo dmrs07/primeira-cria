@@ -1,5 +1,5 @@
 module.exports={
-  "facebook_api_key"      :     "372510549599488",
-  "facebook_api_secret"   :     "ea5cba949541f32cb4c13dda257ad402",
-  "callback_url"          :     "http://localhost:3000/auth/facebook/callback"
+  "facebook_api_key"      :     "1645095605713781",
+  "facebook_api_secret"   :     "8d928b4211acc2303bd1859120e156b4",
+  "callback_url"          :     "http://stormy-brushlands-1988.herokuapp.com/auth/facebook/callback"
 }

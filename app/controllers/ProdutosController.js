@@ -1,5 +1,4 @@
 var stringValidate = require('string');
-var Busboy = require('busboy');
 
 module.exports = function() {
 	var controller = {};
@@ -111,17 +110,7 @@ module.exports = function() {
 
 	controller.upload = function(req, res, next) {
 		console.log("inicio upload: ");
-		var busboy = new Busboy({ headers: req.headers });
-    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-      var saveTo = path.join('', path.basename(fieldname));
-      file.pipe(fs.createWriteStream(saveTo));
-    });
-    busboy.on('finish', function() {
-      res.writeHead(200, { 'Connection': 'close' });
-      res.end("That's all folks!");
-    });
-    return req.pipe(busboy);
-
+		
 	};
 
 	return controller;
