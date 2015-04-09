@@ -38,7 +38,7 @@ module.exports = function() {
 	app.use(bodyParser.urlencoded({ extended: true }));
 	//app.use(multer({ dest: './uploads/'}));
 	app.use(session(
-		{ 	secret: 'homem avestruz',
+		{ 	secret: 'homem paraquedas',
 		resave: true,
 		saveUninitialized: true
 	}
