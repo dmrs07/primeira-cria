@@ -1,12 +1,7 @@
 var express 		  	  = require('express');
 //var multer  					= require('multer');
 
-<<<<<<< HEAD
-//var mysql  			  	  = require('mysql');
-var pg = require('pg');
-=======
 var mysql  			  	  = require('mysql');
->>>>>>> 72f4884dcc6409c109891eb3d312e20cdef94d2c
 var connection  	    = require('express-myconnection');
 var load 			  		  = require('express-load');
 
@@ -22,7 +17,6 @@ var conString = "postgres://xdfqwqdwtgnnqp:TDzLWAfzHHEQfMLUT4Xin2FnsU@ec2-54-163
 module.exports = function() {
 	var app = express();
 
-/*
 	app.use(
 		connection(mysql,{
 			host: 'localhost',
@@ -32,7 +26,6 @@ module.exports = function() {
 			database:'lojinha'
 		}, 'request')
 	);
-*/
 
 	// configuração de ambiente
 	//app.set('port', 3000);
@@ -60,7 +53,6 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
-	/*
 	var connection = mysql.createConnection({
 		host : 'localhost',
 		user : 'root',
@@ -68,10 +60,6 @@ passport.deserializeUser(function(user, done) {
 		port : 3306,
 		database:'lojinha'
 	});
-	*/
-
-	var connection = new pg.Client(conString);
-	connection.connect();
 
 	connection.query("SELECT * FROM usuarios WHERE id = " + user, function(err, rows) {
 		if (rows.length) {
@@ -91,8 +79,7 @@ passport.use(new FacebookStrategy({
 
 }, function(accessToken, refreshToken, profile, done) {
 	process.nextTick(function() {
-
-/*
+		
 		var connection = mysql.createConnection({
 			host : 'localhost',
 			user : 'root',
@@ -100,9 +87,6 @@ passport.use(new FacebookStrategy({
 			port : 3306,
 			database:'lojinha'
 		});
-*/
-	var connection = new pg.Client(conString);
-	connection.connect();
 
 		connection.query("SELECT * FROM usuarios WHERE id = " + profile.id, function(err, rows) {
 
