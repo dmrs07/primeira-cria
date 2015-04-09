@@ -10,6 +10,7 @@ var cookieParser      = require('cookie-parser');
 var session           = require('express-session');
 var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
+var GoogleStrategy		= requeire('passport-google').Strategy;
 var config            = require('./config');
 
 module.exports = function() {
@@ -112,12 +113,35 @@ passport.use(new FacebookStrategy({
 
 }));
 
+//Estratégia de Autenticação - Google+
+
+passport.use(new GoogleStrategy({
+    returnURL: 'http://protected-ridge-1670.herokuapp.com/auth/google/return',
+    realm: 'http://protected-ridge-1670.herokuapp.com/'
+  },
+  function(identifier, profile, done) {
+    User.findOrCreate({ openId: identifier }, function(err, user) {
+      done(err, user);
+    });
+  }
+));
+
 // Passport Router
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_photos'] }));
 app.get('/auth/facebook/callback',
 passport.authenticate('facebook', {
 	successRedirect : '/',
 	failureRedirect: '/#/auth'
+}),
+function(req, res) {
+	res.redirect('/');
+});
+
+app.get('/auth/google', passport.authenticate('google'));
+
+app.get('/auth/google/return',
+  passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login'
 }),
 function(req, res) {
 	res.redirect('/');
