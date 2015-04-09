@@ -10,7 +10,7 @@ var cookieParser      = require('cookie-parser');
 var session           = require('express-session');
 var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
-var GoogleStrategy		= requeire('passport-google').Strategy;
+var GoogleStrategy		= require('passport-google').Strategy;
 var config            = require('./config');
 
 module.exports = function() {
