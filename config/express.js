@@ -10,7 +10,7 @@ var cookieParser      = require('cookie-parser');
 var session           = require('express-session');
 var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
-var GoogleStrategy    = require('passport-google-oauth').OAuthStrategy;
+var GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
 var config            = require('./config');
 
 module.exports = function() {
@@ -116,11 +116,11 @@ passport.use(new FacebookStrategy({
 //Estratégia de Autenticação - Google+
 
 passport.use(new GoogleStrategy({
-    consumerKey: GOOGLE_CONSUMER_KEY,
-    consumerSecret: GOOGLE_CONSUMER_SECRET,
-    callbackURL: "http://protected-ridge-1670.herokuapp.com/auth/google/callback"
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/google/callback"
   },
-  function(token, tokenSecret, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return done(err, user);
     });
@@ -130,7 +130,7 @@ passport.use(new GoogleStrategy({
 // Passport Router
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_photos'] }));
 app.get('/auth/facebook/callback',
-passport.authenticate('facebook', {
+  passport.authenticate('facebook', {
 	successRedirect : '/',
 	failureRedirect: '/#/auth'
 }),
@@ -138,14 +138,15 @@ function(req, res) {
 	res.redirect('/');
 });
 
-app.get('/auth/google', passport.authenticate('google'));
-app.get('/auth/google/return',
-  passport.authenticate('google', { successRedirect: '/',
-                                    failureRedirect: '/login'
-}),
-function(req, res) {
-	res.redirect('/');
-});
+app.get('/auth/google',
+  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // Página inicial
 app.get('/', function(req, res) {
