@@ -12,18 +12,16 @@ var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
 var config            = require('./config');
 
-var conString = "postgres://xdfqwqdwtgnnqp:TDzLWAfzHHEQfMLUT4Xin2FnsU@ec2-54-163-225-82.compute-1.amazonaws.com:5432/d8shfadu2fqeu6";
-
 module.exports = function() {
 	var app = express();
 
 	app.use(
 		connection(mysql,{
-			host: 'localhost',
-			user: 'root',
-			password : '',
+			host: 'us-cdbr-iron-east-02.cleardb.net',
+			user: 'b2956ade07b0e9',
+			password : '4b1ef74e',
 			port : 3306,
-			database:'lojinha'
+			database:'heroku_ab88ec5d5a28d45'
 		}, 'request')
 	);
 
@@ -54,11 +52,11 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(user, done) {
 	var connection = mysql.createConnection({
-		host : 'localhost',
-		user : 'root',
-		password : '',
+		host: 'us-cdbr-iron-east-02.cleardb.net',
+		user: 'b2956ade07b0e9',
+		password : '4b1ef74e',
 		port : 3306,
-		database:'lojinha'
+		database:'heroku_ab88ec5d5a28d45'
 	});
 
 	connection.query("SELECT * FROM usuarios WHERE id = " + user, function(err, rows) {
@@ -79,13 +77,13 @@ passport.use(new FacebookStrategy({
 
 }, function(accessToken, refreshToken, profile, done) {
 	process.nextTick(function() {
-		
+
 		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
+			host: 'us-cdbr-iron-east-02.cleardb.net',
+			user: 'b2956ade07b0e9',
+			password : '4b1ef74e',
 			port : 3306,
-			database:'lojinha'
+			database:'heroku_ab88ec5d5a28d45'
 		});
 
 		connection.query("SELECT * FROM usuarios WHERE id = " + profile.id, function(err, rows) {
