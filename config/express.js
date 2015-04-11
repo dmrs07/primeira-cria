@@ -127,7 +127,7 @@ passport.use(new FacebookStrategy({
 passport.use(new GoogleStrategy({
     clientID: config.GOOGLE_CLIENT_ID,
     clientSecret: config.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://www.protected-ridge-1670.herokuapp.com/auth/google/callback"
+    callbackURL: "http://www.primeiracria.com.br/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
