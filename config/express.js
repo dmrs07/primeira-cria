@@ -121,8 +121,8 @@ passport.use(new FacebookStrategy({
 //Estratégia de Autenticação - Google+
 
 passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
+    clientID: config.GOOGLE_CLIENT_ID,
+    clientSecret: config.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://www.protected-ridge-1670.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -146,7 +146,7 @@ function(req, res) {
 app.get('/auth/google',
   passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
 
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
