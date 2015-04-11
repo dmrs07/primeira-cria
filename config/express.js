@@ -68,6 +68,8 @@ passport.deserializeUser(function(user, done) {
 		}
 
 	});
+
+	connection.end();
 });
 
 // Estratégia de autenticação - Facebook
@@ -88,8 +90,7 @@ passport.use(new FacebookStrategy({
 		});
 
 		connection.query("SELECT * FROM usuarios WHERE id = " + profile.id, function(err, rows) {
-			if(rows){
-				console.log("rows: "+rows);
+			if(rows) {
 
 				if (rows.length) { // Usuário existe
 					var user = rows[0];
@@ -114,6 +115,9 @@ passport.use(new FacebookStrategy({
 
 
 		});
+
+		connection.end();
+
 	});
 
 }));
