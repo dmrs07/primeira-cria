@@ -88,25 +88,30 @@ passport.use(new FacebookStrategy({
 		});
 
 		connection.query("SELECT * FROM usuarios WHERE id = " + profile.id, function(err, rows) {
+			if(rows){
+				console.log("rows: "+rows);
 
-			if (rows.length) { // Usuário existe
-				var user = rows[0];
-
-				return done(null, user);
-
-			} else {
-				var insertQuery = "INSERT INTO usuarios ( id, nome, email ) values ('" + profile.id +"', '"+ profile.name.givenName  +"', '" + profile.emails[0].value +"')";
-
-				connection.query(insertQuery, function(err,rows) {
-					var user = new Object();
-
-					user.id = profile.id;
-					user.nome = profile.name.givenName;
-					user.email = profile.email;
+				if (rows.length) { // Usuário existe
+					var user = rows[0];
 
 					return done(null, user);
-				});
+
+				} else {
+					var insertQuery = "INSERT INTO usuarios ( id, nome, email ) values ('" + profile.id +"', '"+ profile.name.givenName  +"', '" + profile.emails[0].value +"')";
+
+					connection.query(insertQuery, function(err,rows) {
+						var user = new Object();
+
+						user.id = profile.id;
+						user.nome = profile.name.givenName;
+						user.email = profile.email;
+
+						return done(null, user);
+					});
+				}
 			}
+
+
 
 		});
 	});
