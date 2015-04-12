@@ -11,7 +11,8 @@ var session           = require('express-session');
 var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
 var GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
-var config            = require('./config');
+var configFacebook    = require('./config-facebook');
+var configGoogle      = require('./config-google');
 
 module.exports = function() {
 	var app = express();
@@ -74,9 +75,9 @@ passport.deserializeUser(function(user, done) {
 
 // Estratégia de autenticação - Facebook
 passport.use(new FacebookStrategy({
-	clientID: 	  config.facebook_api_key,
-	clientSecret: config.facebook_api_secret ,
-	callbackURL:  config.callback_url
+	clientID: 	  configFacebook.FACEBOOK_API_KEY,
+	clientSecret: configFacebook.FACEBOOK_API_SECRET,
+	callbackURL:  configFacebook.CALLBACK_URL
 
 }, function(accessToken, refreshToken, profile, done) {
 	process.nextTick(function() {
@@ -124,9 +125,9 @@ passport.use(new FacebookStrategy({
 
 //Estratégia de Autenticação - Google+
 passport.use(new GoogleStrategy({
-    clientID: config.GOOGLE_CLIENT_ID,
-    clientSecret: config.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://www.primeiracria.com.br/auth/google/callback"
+    clientID: 		configGoogle.GOOGLE_CLIENT_ID,
+    clientSecret: configGoogle.GOOGLE_CLIENT_SECRET,
+    callbackURL:  "http://www.primeiracria.com.br/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 	process.nextTick(function() {
