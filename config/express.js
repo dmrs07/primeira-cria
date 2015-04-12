@@ -123,18 +123,54 @@ passport.use(new FacebookStrategy({
 }));
 
 //Estratégia de Autenticação - Google+
-
 passport.use(new GoogleStrategy({
     clientID: config.GOOGLE_CLIENT_ID,
     clientSecret: config.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://www.protected-ridge-1670.herokuapp.com/auth/google/callback"
+    callbackURL: "http://www.primeiracria.com.br/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
+	process.nextTick(function() {
+
+		var connection = mysql.createConnection({
+			host: 'us-cdbr-iron-east-02.cleardb.net',
+			user: 'b2956ade07b0e9',
+			password : '4b1ef74e',
+			port : 3306,
+			database:'heroku_ab88ec5d5a28d45'
+		});
+
+		connection.query("SELECT * FROM usuarios WHERE id = " + profile.id, function(err, rows) {
+			if(rows) {
+
+				if (rows.length) { // Usuário existe
+					var user = rows[0];
+
+					return done(null, user);
+
+				} else {
+					var insertQuery = "INSERT INTO usuarios ( id, nome, email ) values ('" + profile.id +"', '"+ profile.name.givenName  +"', '" + profile.emails[0].value +"')";
+
+					connection.query(insertQuery, function(err,rows) {
+						var user = new Object();
+
+						user.id = profile.id;
+						user.nome = profile.name.givenName;
+						user.email = profile.email;
+
+						return done(null, user);
+					});
+				}
+			}
+
+
+
+		});
+
+		connection.end();
+
+	});
+
+}));
 
 // Passport Router
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_photos'] }));
