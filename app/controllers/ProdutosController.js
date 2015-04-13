@@ -129,7 +129,7 @@ module.exports = function() {
 		var sql = null;
 
 		sql = "insert into imagens (imagem, produto_id)" +
-					"values ('"+data.img+"', '"+data.id+"')";
+					"values ('"+data.img+"', '"+data.produto+"')";
 
 		req.getConnection(function(err, conn) {
 

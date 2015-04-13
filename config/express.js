@@ -35,8 +35,8 @@ module.exports = function() {
 
 	// middlewares
 	app.use(cookieParser());
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json({limit: '50mb'}));
+	app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 
 	// config multer upload
 	app.use(multer({ dest: './uploads/',

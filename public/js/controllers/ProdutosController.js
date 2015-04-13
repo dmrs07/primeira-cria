@@ -69,12 +69,29 @@ function($scope, $http, $routeParams, $location) {
 	$scope.delete = function(id) {
 			var response = $http.get("/produtodelete/" + id);
 
-			$scope.findAll();
+			response.success(function(data, status, headers, config) {
+				$scope.findAll();
+			}).
+
+			error(function(data, status, headers, config) {
+				console.log("ERRO: " + data + " STATUS: " + status);
+			});
 	}
 
 	$scope.upload = function() {
-		$scope.row.img = $scope.row.file1.dataURI();
+		$scope.imagem = {};
 
-		var response = $http.post("/upload/", $scope.row);
+		$scope.imagem.img = $scope.row.file1.dataURI();
+		$scope.imagem.produto = $scope.row.id;
+
+		var response = $http.post("/upload/", $scope.imagem);
+
+		response.success(function(data, status, headers, config) {
+			$scope.findImagensByIdProduto();
+		}).
+
+		error(function(data, status, headers, config) {
+			console.log("ERRO: " + data + " STATUS: " + status);
+		});
 	}
 });
