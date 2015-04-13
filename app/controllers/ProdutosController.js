@@ -51,6 +51,22 @@ module.exports = function() {
     	});
 	};
 
+	controller.findImagensByIdProduto = function(req, res) {
+		req.getConnection(function(err, conn) {
+
+	        var query =
+	        		conn.query("select id, CAST(imagem AS char(100000)) as imagem from imagens where produto_id = " + req.params.id, function(err, rows) {
+		                if(err) {
+		                    res.json(err);
+
+		                } else {
+		                    res.json(rows);
+
+		                }
+		            });
+    	});
+	};
+
 	controller.save = function(req, res) {
 		var data = req.body;
 		var msgSucesso;
@@ -108,9 +124,26 @@ module.exports = function() {
     	});
 	};
 
-	controller.upload = function(req, res, next) {
-		console.log("inicio upload: ");
-		
+	controller.upload = function(req, res) {
+		var data = req.body;
+		var sql = null;
+
+		sql = "insert into imagens (imagem, produto_id)" +
+					"values ('"+data.img+"', '"+data.id+"')";
+
+		req.getConnection(function(err, conn) {
+
+        var query =
+        		conn.query(sql, function(err, rows) {
+	                if(err) {
+	                    res.json(err);
+
+	                } else {
+	                    res.json("Operação realizada com sucesso");
+
+	                }
+	            });
+    	});
 	};
 
 	return controller;

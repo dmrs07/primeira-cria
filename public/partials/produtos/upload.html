@@ -1,12 +1,15 @@
 <div class="section">
   <div class="container">
-    <div class="row">
+    <div class="row" ng-init="findById()">
       <div class="col-sm-12">
         <form role="form" enctype="multipart/form-data">
 
           <div class="form-group">
-            <input id="file1" ng-model="row.file1" type="file">
-            <input ng-model="row.nome" class="form-control" id="nome" placeholder="Nome" type="text">
+            <input type='file' ng-model='row.file1' base-sixty-four-input>
+            </div>
+
+          <div class="form-group">
+            <input ng-model="row.id" class="form-control" id="id" placeholder="id" type="text">
           </div>
 
           <div class="form-group">
@@ -16,5 +19,26 @@
         </form>
       </div>
     </div>
+
+    <div class="row" ng-init="findImagensByIdProduto()">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>#</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="row in imgrows | filter: { nome: query}">
+              <td><img height="171" src="{{row.imagem}}" /></td>
+              <th><a href="#/lista-produto" role="button" class="text-danger" ng-click="delete({{row.id}})"  confirmation="Posso mesmo excluir?">Excluir</a></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>

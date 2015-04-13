@@ -1,5 +1,5 @@
 var express 		  	  = require('express');
-//var multer  					= require('multer');
+var multer  					= require('multer');
 
 var mysql  			  	  = require('mysql');
 var connection  	    = require('express-myconnection');
@@ -13,6 +13,7 @@ var FacebookStrategy  = require('passport-facebook').Strategy;
 var GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
 var configFacebook    = require('./config-facebook');
 var configGoogle      = require('./config-google');
+var done              = false;
 
 module.exports = function() {
 	var app = express();
@@ -28,7 +29,6 @@ module.exports = function() {
 	);
 
 	// configuração de ambiente
-	//app.set('port', 3000);
 	app.set('views', 'app/views');
 	app.set('view engine', 'ejs');
 	app.use(express.static('./public'));
@@ -37,7 +37,22 @@ module.exports = function() {
 	app.use(cookieParser());
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
-	//app.use(multer({ dest: './uploads/'}));
+
+	// config multer upload
+	app.use(multer({ dest: './uploads/',
+		rename: function (fieldname, filename) {
+			return filename + Date.now();
+		},
+		onFileUploadStart: function (file) {
+			console.log(file.originalname + ' is starting ...')
+		},
+		onFileUploadComplete: function (file) {
+			console.log(file.fieldname + ' uploaded to  ' + file.path)
+			done=true;
+		},
+		inMemory: true
+	}));
+
 	app.use(session(
 		{ 	secret: 'homem paraquedas',
 		resave: true,

@@ -41,6 +41,15 @@ function($scope, $http, $routeParams, $location) {
 		}
 	}
 
+	$scope.findImagensByIdProduto = function() {
+		if($routeParams.id) {
+			$http.get("/imagem/" + $routeParams.id)
+			.success(function(data) {
+				$scope.imgrows = data;
+			});
+		}
+	}
+
 	$scope.save = function() {
 		var response = $http.post("/salvarproduto/", $scope.row);
 
@@ -64,14 +73,8 @@ function($scope, $http, $routeParams, $location) {
 	}
 
 	$scope.upload = function() {
+		$scope.row.img = $scope.row.file1.dataURI();
+
 		var response = $http.post("/upload/", $scope.row);
-
-		response.success(function(data, status, headers, config) {
-			console.log("DATA: " + data);
-		}).
-
-		error(function(data, status, headers, config) {
-			console.log("ERRO: " + data + " STATUS: " + status);
-		});
 	}
 });

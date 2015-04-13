@@ -1,0 +1,41 @@
+{
+  "name": "angular-file-model",
+  "version": "0.3.0",
+  "authors": [
+    "Jose Luis Rivas <me@ghostbar.co>"
+  ],
+  "description": "Angular support for file in models",
+  "main": "angular-file-model.js",
+  "keywords": [
+    "file",
+    "model",
+    "angular",
+    "directory"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test.js",
+    "tests",
+    "example",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "~1.2.18"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.18"
+  },
+  "homepage": "https://github.com/ghostbar/angular-file-model",
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0",
+    "commit": "b402d84e6788fa741b2d3b288ae8466df9746c31"
+  },
+  "_source": "git://github.com/ghostbar/angular-file-model.git",
+  "_target": "~0.3.0",
+  "_originalSource": "angular-file-model"
+}

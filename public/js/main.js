@@ -1,4 +1,4 @@
-angular.module('main', ['ngRoute', 'ngResource'])
+angular.module('main', ['ngRoute', 'ngResource', 'naif.base64'])
 
 .config(function($routeProvider, $httpProvider) {
 

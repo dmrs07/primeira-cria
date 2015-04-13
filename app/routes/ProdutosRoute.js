@@ -15,6 +15,7 @@ module.exports = function(app) {
 	app.post('/salvarproduto',  	verificaAutenticacao, produtosController.save);
 	app.get('/listarproduto',   	verificaAutenticacao, produtosController.findAll);
 	app.get('/produto/:id', 			verificaAutenticacao, produtosController.findById);
+	app.get('/imagem/:id', 			  verificaAutenticacao, produtosController.findImagensByIdProduto);
 	app.get('/produtodelete/:id', verificaAutenticacao, produtosController.delete);
 	app.post('/upload', 					verificaAutenticacao, produtosController.upload);
 }
