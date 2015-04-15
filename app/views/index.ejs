@@ -7,11 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -36,7 +32,7 @@
       <div class="collapse navbar-collapse" id="navbar-ex-collapse">
         <ul class="nav navbar-nav navbar-right">
             <% if (!user) { %>
-              <li><a href="#" data-toggle="modal" data-target="#modalLogin">Entrar</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#myModal">Entrar</a></li>
             <% } %>
 
             <% if (user) { %>
@@ -55,7 +51,7 @@
       </div>
 
       <!-- Modal Login -->
-      <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -80,6 +76,9 @@
           </div>
         </div>
       </div>
+
+      <script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
+      <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
       <script src="vendor/angular/angular.js"></script>
       <script src="vendor/angular-route/angular-route.js"></script>
