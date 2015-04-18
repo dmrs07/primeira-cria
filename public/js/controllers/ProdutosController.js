@@ -94,4 +94,16 @@ function($scope, $http, $routeParams, $location) {
 			console.log("ERRO: " + data + " STATUS: " + status);
 		});
 	}
+
+	$scope.deleteImagem = function(id) {
+			var response = $http.get("/deleteimagem/" + id);
+
+			response.success(function(data, status, headers, config) {
+				$scope.findImagensByIdProduto();
+			}).
+
+			error(function(data, status, headers, config) {
+				console.log("ERRO: " + data + " STATUS: " + status);
+			});
+	}
 });

@@ -18,4 +18,5 @@ module.exports = function(app) {
 	app.get('/imagem/:id', 			  verificaAutenticacao, produtosController.findImagensByIdProduto);
 	app.get('/produtodelete/:id', verificaAutenticacao, produtosController.delete);
 	app.post('/upload', 					verificaAutenticacao, produtosController.upload);
+	app.get('/deleteimagem/:id',			verificaAutenticacao, produtosController.deleteImagem);
 }
