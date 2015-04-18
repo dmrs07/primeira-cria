@@ -1,3 +1,4 @@
 # Ignorar esta pasta
 node_modules/*
 public/vendor/*
+config/config-facebook.js
