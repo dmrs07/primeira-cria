@@ -125,6 +125,8 @@ module.exports = function() {
 	};
 
 	controller.upload = function(req, res) {
+		console.log("Inicio Produto Upload Imagem");
+
 		var data = req.body;
 		var sql = null;
 
@@ -132,6 +134,8 @@ module.exports = function() {
 					"values ('"+data.img+"', '"+data.produto+"')";
 
 		req.getConnection(function(err, conn) {
+
+			console.log("Processando upload...");
 
         var query =
         		conn.query(sql, function(err, rows) {
@@ -144,6 +148,8 @@ module.exports = function() {
 	                }
 	            });
     	});
+
+			console.log("Fim Produto Upload Imagem");
 	};
 
 	controller.deleteImagem = function(req, res) {

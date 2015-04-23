@@ -45,7 +45,7 @@ function($scope, $http, $routeParams, $location) {
 		if($routeParams.id) {
 			$http.get("/imagem/" + $routeParams.id)
 			.success(function(data) {
-				$scope.imgrows = data;
+				$scope.imgs = data;
 			});
 		}
 	}
