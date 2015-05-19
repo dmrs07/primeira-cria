@@ -2,3 +2,4 @@
 node_modules/*
 public/vendor/*
 config/config-facebook.js
+config/config-google.js

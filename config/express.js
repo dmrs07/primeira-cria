@@ -10,7 +10,7 @@ var cookieParser      = require('cookie-parser');
 var session           = require('express-session');
 var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
-var GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy    = require('passport-google-oauth2').Strategy;
 var configFacebook    = require('./config-facebook');
 var configGoogle      = require('./config-google');
 var done              = false;
@@ -127,9 +127,6 @@ passport.use(new FacebookStrategy({
 					});
 				}
 			}
-
-
-
 		});
 
 		connection.end();
@@ -143,9 +140,54 @@ passport.use(new GoogleStrategy({
     clientID: 		configGoogle.GOOGLE_CLIENT_ID,
     clientSecret: configGoogle.GOOGLE_CLIENT_SECRET,
     callbackURL:  configGoogle.GOOGLE_CALLBACK_URL
-  },
-  function(accessToken, refreshToken, profile, done) {
+
+  }, function(accessToken, refreshToken, profile, done) {
+		process.nextTick(function() {
+
+			// To keep the example simple, the user's Google profile is returned to
+			// represent the logged-in user.  In a typical application, you would want
+			// to associate the Google account with a user record in your database,
+			// and return that user instead.
+
+			var connection = mysql.createConnection({
+				host: 'us-cdbr-iron-east-02.cleardb.net',
+				user: 'b2956ade07b0e9',
+				password : '4b1ef74e',
+				port : 3306,
+				database:'heroku_ab88ec5d5a28d45'
+			});
+
+			connection.query("SELECT * FROM usuarios WHERE id = " + profile.id, function(err, rows) {
+				if(rows) {
+
+					if (rows.length) { // Usuário existe
+
+						var user = rows[0];
+
+						return done(null, user);
+
+					} else {
+						var insertQuery = "INSERT INTO usuarios ( id, nome, email ) values ('" + profile.id +"', '"+ profile.name.givenName  +"', '" + profile.emails[0].value +"')";
+
+						connection.query(insertQuery, function(err,rows) {
+							var user = new Object();
+
+							user.id = profile.id;
+							user.nome = profile.name.givenName;
+							user.email = profile.email;
+
+							return done(null, profile);
+						});
+					}
+				}
+			});
+
+			connection.end();
+
+		});
+
 	}));
+
 
 // Passport Router
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_photos'] }));
@@ -159,7 +201,7 @@ function(req, res) {
 });
 
 app.get('/auth/google',
-  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+  passport.authenticate('google',{scope: 'https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile' }));
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
