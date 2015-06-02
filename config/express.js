@@ -204,7 +204,10 @@ app.get('/auth/google',
   passport.authenticate('google',{scope: 'https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile' }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', {
+	successRedirect : '/',
+	failureRedirect: '/#/auth'
+}),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
