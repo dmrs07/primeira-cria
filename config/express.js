@@ -205,7 +205,7 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['https://www.go
 app.get('/auth/google/callback',
   passport.authenticate('google', {
 	successRedirect : '/',
-	failureRedirect: '/'
+	failureRedirect: '/#/auth'
 }),
   function(req, res) {
     // Successful authentication, redirect home.
