@@ -10,7 +10,7 @@ var cookieParser      = require('cookie-parser');
 var session           = require('express-session');
 var passport          = require('passport');
 var FacebookStrategy  = require('passport-facebook').Strategy;
-var GoogleStrategy    = require('passport-google-oauth2').Strategy;
+var GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
 var configFacebook    = require('./config-facebook');
 var configGoogle      = require('./config-google');
 var done              = false;
@@ -142,6 +142,7 @@ passport.use(new GoogleStrategy({
     callbackURL:  configGoogle.GOOGLE_CALLBACK_URL
 
   }, function(accessToken, refreshToken, profile, done) {
+		alert('test');
 		process.nextTick(function() {
 
 			// To keep the example simple, the user's Google profile is returned to
@@ -200,11 +201,12 @@ function(req, res) {
 	res.redirect('/');
 });
 
-app.get('/auth/google',
-  passport.authenticate('google',{scope: 'https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile' }));
-
+app.get('/auth/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'] }));
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', {
+	successRedirect : '/',
+	failureRedirect: '/'
+}),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
