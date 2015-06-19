@@ -78,7 +78,11 @@
       <div class="section">
         <div class="container">
           <div class="row">
-            <div ng-view></div>
+            <div ng-view>
+            <ng-include
+              src="'content.html'">
+           </ng-include>
+            </div>
           </div>
         </div>
       </div>
