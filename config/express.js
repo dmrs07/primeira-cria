@@ -194,7 +194,7 @@ passport.use(new GoogleStrategy({
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_photos'] }));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
-	successRedirect : '/',
+	successRedirect : '/#/front',
 	failureRedirect: '/#/auth'
 }),
 function(req, res) {
